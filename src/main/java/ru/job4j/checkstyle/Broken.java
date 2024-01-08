@@ -6,15 +6,15 @@ public class Broken {
     private String name;
     private int sizeOfEmpty = 10;
 
-    void echo() { }
+    public Broken() { }
 
-    void media(Object obj) {
+    public void echo() { }
+
+    public void media(Object obj) {
         if (obj != null) {
             System.out.println(obj);
         }
     }
 
-    void method(int a, int b) { }
-
-    Broken() { }
+    public void method(int a, int b) { }
 }
