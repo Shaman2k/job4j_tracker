@@ -16,6 +16,8 @@ public class Matches {
             if (matches >= 1 && matches <= Math.min(3, count)) {
                 turn = !turn;
                 count -= matches;
+            } else {
+                System.out.println("Некорректное число. Попробуйте еще раз");
             }
         }
         if (!turn) {
