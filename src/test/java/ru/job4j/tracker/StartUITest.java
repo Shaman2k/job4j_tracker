@@ -15,7 +15,7 @@ class StartUITest {
         Input input = new MockInput(
                 new String[]{"0", "Item name", "1"}
         );
-        Tracker tracker = new Tracker();
+        Store tracker = new MemTracker();
         List<UserAction> actions = new ArrayList<>();
         actions.add(new Create(output));
         actions.add(new Exit(output));
@@ -26,7 +26,7 @@ class StartUITest {
     @Test
     void whenReplaceItem() {
         Output output = new StubOutput();
-        Tracker tracker = new Tracker();
+        Store tracker = new MemTracker();
         Item item = tracker.add(new Item("Replaced item"));
         String replacedName = "New item name";
         Input input = new MockInput(
@@ -42,7 +42,7 @@ class StartUITest {
     @Test
     void whenDeleteItem() {
         Output output = new StubOutput();
-        Tracker tracker = new Tracker();
+        Store tracker = new MemTracker();
         Item item = tracker.add(new Item("Deleted item"));
         Input input = new MockInput(
                 new String[]{"0", String.valueOf(item.getId()), "1"}
@@ -60,7 +60,7 @@ class StartUITest {
         Input input = new MockInput(
                 new String[]{"0"}
         );
-        Tracker tracker = new Tracker();
+        Store tracker = new MemTracker();
         List<UserAction> actions = new ArrayList<>();
         actions.add(new Exit(output));
         new StartUI(output).init(input, tracker, actions);
@@ -74,7 +74,7 @@ class StartUITest {
     @Test
     void whenReplaceItemTestOutputIsSuccessfully() {
         Output output = new StubOutput();
-        Tracker tracker = new Tracker();
+        Store tracker = new MemTracker();
         Item one = tracker.add(new Item("test1"));
         String replaceName = "New Test Name";
         Input input = new MockInput(
@@ -101,7 +101,7 @@ class StartUITest {
     @Test
     void whenFindByIdActionTestOutputIsSuccessfully() {
         Output output = new StubOutput();
-        Tracker tracker = new Tracker();
+        Store tracker = new MemTracker();
         Item one = tracker.add(new Item("test1"));
         Input input = new MockInput(
                 new String[]{"0", String.valueOf(one.getId()), "1"}
@@ -127,7 +127,7 @@ class StartUITest {
     @Test
     void whenFindByNameActionTestOutputIsSuccessfully() {
         Output output = new StubOutput();
-        Tracker tracker = new Tracker();
+        Store tracker = new MemTracker();
         Item one = tracker.add(new Item("test1"));
         Input input = new MockInput(
                 new String[]{"0", one.getName(), "1"}
@@ -153,7 +153,7 @@ class StartUITest {
     @Test
     void whenFindAllActionTestOutputIsSuccessfully() {
         Output output = new StubOutput();
-        Tracker tracker = new Tracker();
+        Store tracker = new MemTracker();
         Item test1 = tracker.add(new Item("test1"));
         Item test2 = tracker.add(new Item("test2"));
         Item test3 = tracker.add(new Item("test3"));
@@ -186,7 +186,7 @@ class StartUITest {
         Input input = new MockInput(
                 new String[]{"1", "0"}
         );
-        Tracker tracker = new Tracker();
+        Store tracker = new MemTracker();
         List<UserAction> actions = new ArrayList<>();
         actions.add(new Exit(output));
         new StartUI(output).init(input, tracker, actions);
