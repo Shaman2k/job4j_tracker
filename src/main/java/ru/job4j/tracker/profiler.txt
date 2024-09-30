@@ -1,0 +1,102 @@
+1. Анализ с помощью jmap
+Запуск StartUI
+
+   1:          1501        2030208  [I (java.base@17.0.8)
+   2:         15046        1704464  [B (java.base@17.0.8)
+   3:         12014         384448  java.util.HashMap$Node (java.base@17.0.8)
+   4:         11984         287616  java.lang.String (java.base@17.0.8)
+   5:           876         188176  [Ljava.util.HashMap$Node; (java.base@17.0.8)
+   6:          3744         180008  [Ljava.lang.Object; (java.base@17.0.8)
+   7:          1319         161384  java.lang.Class (java.base@17.0.8)
+   8:           321         133824  [C (java.base@17.0.8)
+   9:          2979          95328  java.util.concurrent.ConcurrentHashMap$Node (java.base@17.0.8)
+  10:          1003          56168  jdk.internal.org.objectweb.asm.SymbolTable$Entry (java.base@17.0.8)
+  11:            62          52000  [Ljdk.internal.org.objectweb.asm.SymbolTable$Entry; (java.base@17.0.8)
+  12:          1287          51480  java.util.LinkedHashMap$Entry (java.base@17.0.8)
+  13:           931          37240  java.lang.invoke.MethodType (java.base@17.0.8)
+  14:           663          37184  [Ljava.lang.String; (java.base@17.0.8)
+  15:            87          34800  [Ljava.util.concurrent.ConcurrentHashMap$Node; (java.base@17.0.8)
+  16:           692          33216  java.lang.invoke.MemberName (java.base@17.0.8)
+  17:           689          33072  java.util.HashMap (java.base@17.0.8)
+  18:          1055          29184  [Ljava.lang.Class; (java.base@17.0.8)
+  19:           588          23520  java.util.HashMap$KeyIterator (java.base@17.0.8)
+  20:           812          19488  java.lang.StringBuilder (java.base@17.0.8)
+____
+Total         71232        6042064
+
+После создания 200000 записей
+
+
+PS E:\projects\job4j_tracker> jmap -histo 18956
+ num     #instances         #bytes  class name (module)
+-------------------------------------------------------
+   1:        211001       10682160  [B (java.base@17.0.8)
+   2:        210179        5044296  java.lang.String (java.base@17.0.8)
+   3:        200154        4803696  java.time.LocalDateTime (java.base@17.0.8)
+   4:        200092        4802208  java.time.LocalDate (java.base@17.0.8)
+   5:        200027        4800648  java.time.LocalTime (java.base@17.0.8)
+   6:        200000        4800000  ru.job4j.tracker.Item
+   7:          1027        2774536  [I (java.base@17.0.8)
+   8:          1546        1074008  [Ljava.lang.Object; (java.base@17.0.8)
+   9:          3378         189168  sun.util.calendar.ZoneInfo (java.base@17.0.8)
+  10:          5365         171680  java.util.HashMap$Node (java.base@17.0.8)
+  11:          1386         169440  java.lang.Class (java.base@17.0.8)
+  12:          2789          89248  java.util.concurrent.ConcurrentHashMap$Node (java.base@17.0.8)
+  13:           222          77928  [C (java.base@17.0.8)
+  14:           351          71792  [Ljava.util.HashMap$Node; (java.base@17.0.8)
+  15:          1130          45200  java.util.LinkedHashMap$Entry (java.base@17.0.8)
+  16:            68          28608  [Ljava.util.concurrent.ConcurrentHashMap$Node; (java.base@17.0.8)
+  17:           512          26736  [Ljava.lang.String; (java.base@17.0.8)
+  18:           351          16848  java.util.HashMap (java.base@17.0.8)
+  19:           198          15048  [Ljava.lang.ref.SoftReference; (java.base@17.0.8)
+
+Total       1247937       39961112
+
+Видно, что добавилось 200000 объектов ru.job4j.tracker.Item. Кроме этого, добавилось по 200000 экземпляров LocalTime, LocalDate, LocalDateTime и почти по 200000 String и массивов байт.
+Объем занимаемой памяти вырос на 33,3 Мб.
+
+PS E:\projects\job4j_tracker> jmap -histo 18956
+ num     #instances         #bytes  class name (module)
+-------------------------------------------------------
+   1:        211191       10697408  [B (java.base@17.0.8)
+   2:        210296        5047104  java.lang.String (java.base@17.0.8)
+   3:        200154        4803696  java.time.LocalDateTime (java.base@17.0.8)
+   4:        200092        4802208  java.time.LocalDate (java.base@17.0.8)
+   5:        200027        4800648  java.time.LocalTime (java.base@17.0.8)
+   6:        200000        4800000  ru.job4j.tracker.Item
+   7:          1581        3475224  [Ljava.lang.Object; (java.base@17.0.8)
+   8:          1079        3424584  [I (java.base@17.0.8)
+   9:        200141        3202256  java.lang.Integer (java.base@17.0.8)
+  10:          3378         189168  sun.util.calendar.ZoneInfo (java.base@17.0.8)
+  11:          1408         171968  java.lang.Class (java.base@17.0.8)
+  12:          5365         171680  java.util.HashMap$Node (java.base@17.0.8)
+  13:          2802          89664  java.util.concurrent.ConcurrentHashMap$Node (java.base@17.0.8)
+  14:           224          78160  [C (java.base@17.0.8)
+  15:           351          71792  [Ljava.util.HashMap$Node; (java.base@17.0.8)
+  16:          1130          45200  java.util.LinkedHashMap$Entry (java.base@17.0.8)
+  17:            68          28608  [Ljava.util.concurrent.ConcurrentHashMap$Node; (java.base@17.0.8)
+  18:           516          27000  [Ljava.lang.String; (java.base@17.0.8)
+  19:           351          16848  java.util.HashMap (java.base@17.0.8)
+  20:           320          15360  java.lang.invoke.MemberName (java.base@17.0.8)
+
+Total       1448645       46252528
+
+После удаления всех заявок созданные объекты остались в heap
+
+
+Запуск StartUI с ограничением размера Heap 64Мb (-Xmx64M)
+После добавления 350000 заявок паять почти заполнена
+ num     #instances         #bytes  class name (module)
+-------------------------------------------------------
+   1:        360974       17872976  [B (java.base@17.0.8)
+   2:        360163        8643912  java.lang.String (java.base@17.0.8)
+   3:        350154        8403696  java.time.LocalDateTime (java.base@17.0.8)
+   4:        350092        8402208  java.time.LocalDate (java.base@17.0.8)
+   5:        350027        8400648  java.time.LocalTime (java.base@17.0.8)
+   6:        350000        8400000  ru.job4j.tracker.Item
+   7:          1464        1551904  [Ljava.lang.Object; (java.base@17.0.8)
+   8:           424         250280  [I (java.base@17.0.8)
+
+Total       2145524       63043872
+
+При попытке добавить еще 50000 заявок java.lang.OutOfMemoryError
