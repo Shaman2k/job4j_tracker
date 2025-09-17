@@ -6,7 +6,6 @@ import ru.job4j.ood.srp.formatter.ReportDateTimeParser;
 import ru.job4j.ood.srp.model.Employee;
 import ru.job4j.ood.srp.store.MemoryStore;
 
-import javax.xml.bind.JAXBException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -23,7 +22,7 @@ class ReportEngineJsonTest {
     }
 
     @Test
-    void whenAccountantsGenerated() throws JAXBException {
+    void whenAccountantsGenerated() {
         MemoryStore store = new MemoryStore();
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         Employee employee = new Employee("John Doe",
