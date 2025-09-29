@@ -1,6 +1,6 @@
 package ru.job4j.ood.srp.formatter;
 
-import jakarta.xml.bind.annotation.adapters.XmlAdapter;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -16,7 +16,7 @@ public class XmlDateAdapter extends XmlAdapter<String, Calendar> {
     }
 
     @Override
-    public String marshal(Calendar calendar) throws Exception {
+    public String marshal(Calendar calendar) {
         return DATE_FORMAT.format(calendar.getTime());
     }
 }

@@ -3,12 +3,17 @@ package ru.job4j.tracker;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@Entity
+@Table(name = "items")
 @Data
 public class Item {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String name;
     @EqualsAndHashCode.Exclude
     private LocalDateTime created = LocalDateTime.now().withNano(0);

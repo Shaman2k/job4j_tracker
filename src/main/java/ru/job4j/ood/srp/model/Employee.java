@@ -1,8 +1,10 @@
 package ru.job4j.ood.srp.model;
 
-import jakarta.xml.bind.annotation.*;
+import javax.xml.bind.annotation.*;
+
 import ru.job4j.ood.srp.formatter.XmlDateAdapter;
-import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import java.util.Calendar;
 import java.util.Objects;
